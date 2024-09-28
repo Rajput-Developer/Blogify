@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Home</title>
+  </head>
+  <body>
+    <%- include('./partials/navbar') %>
+
+    <div class="container mt-4">
+      <div class="blog-info d-flex gap-5">
+        <div class="blog-image">
+          <img src="<%= blogs.coverImage %>" width="400px" alt="" />
+        </div>
+        <div class="blog-info">
+          <h1 class="text-capitalize mt-3"><%= blogs.title %></h1>
+          <p><%= blogs.description %></p>
+        </div>
+      </div>
+
+      <div class="blog-back-button mt-5">
+        <a href="/" class="btn btn-primary">Go to Home</a>
+      </div>
+    </div>
+
+    <div class="container mt-5 d-flex align-items-center">
+      <img src="<%= blogs.createdBy.Image %>" width="50px" />
+      <p><%= blogs.createdBy.name %></p>
+    </div>
+
+
+    <div class="container mt-5">
+      <h1>Comments (<%= Comments.length %>) </h1>
+
+       <form action="/blog/comment/<%= blogs._id %>" method="post">
+        <div class="mb-3"></div>
+          <input
+            type="text"
+            name="content"
+            class="form-control"
+            placeholder="Enter your comment"
+          />
+          <button class="btn btn-sm btn-primary" type="submit">Add</button>
+        </div>
+       </form>
+
+      <div class="container mt-4">
+        <% Comments.forEach(comment => { %>
+          <div class="blog-comment d-flex align-items-center">
+            <img src="<%= comment.createdBy.Image %>" width="50px" alt="">
+         <h6><%= comment.createdBy.name %></h6>
+          </div>
+         <pre class="mx-5 mt-4"><%= comment.content %></pre>
+        <% }) %>
+      </div>
+    </div>
+
+    <%- include('./partials/script') %>
+  </body>
+</html>
