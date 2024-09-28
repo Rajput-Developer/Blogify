@@ -10,7 +10,7 @@ import { GetAllBlogs } from './controllers/blog.controller.js';
 
 dotenv.config()
 const app = express();
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 // DBConnection
 async function DBConnection() {
